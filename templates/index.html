@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CURD Appliction</title>
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'index.css'%}">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container maxer">
+        
+        <div class="container maxer">
+        <form method="POST">
+            {%csrf_token%}
+            <table class="table table-success table-striped"">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">name</th>
+                    <th scope="col">Number</th>
+                    <th scope="col">Email</th>
+                    <th scope="col" class="upper">Update</th>
+                    <th scope="col" class="upper">Delete</th>
+                    
+                </tr>
+                </thead>
+                
+                    <tbody>
+                    {%for i in hello%}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{i.name}}</td>
+                        <td>{{i.number}}</td>
+                        <td>{{i.Email}}</td>
+                        <td class="sm">
+                            <a href="/update/{{i.id}}" class="btn btn-success btn-sm" role="button">Update</a>
+                        </td>
+                        <td>
+                            <a href="delete/{{i.id}}" class="btn btn-danger btn-sm" role="button">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+            </table>
+            <button class="btn btn-primary" type="submit" style="transform:translate(200px,40px);">SUBMIT</button>
+        </form>
+        </div>
+        <div class="button_area">
+            <div class="btn btn-dark" onclick="set_click()" style="margin-left: 80px;">ADD NEW</div>
+        </div>
+    </div>
+    <script>
+       var line = 0
+        const set_click = ()=>{
+           
+            if (line == 0){
+                var fist = document.querySelector('tbody')
+                var next = document.createElement('tr')
+                var best = document.createElement('td')
+                var best1 = document.createElement('td')
+                var best2 = document.createElement('td')
+                var best3 = document.createElement('td')
+                var first_in = document.createElement('input')
+                var first_input = document.createElement('input')
+                var middle_input = document.createElement('input')
+                var last_input = document.createElement('input')
+
+                /* SetAttribute name to input  field */
+                first_input.setAttribute('name','name')
+                middle_input.setAttribute('name','number')
+                last_input.setAttribute('name','Email')
+
+                /* append tr tag to tbody tag */
+                fist.appendChild(next)
+
+                /* append td tag to tr tag */
+                next.appendChild(best)
+                next.appendChild(best1)
+                next.appendChild(best2)
+                next.appendChild(best3)
+
+                /* append input field to td tag */
+
+                best1.appendChild(first_input)
+                best2.appendChild(middle_input)
+                best3.appendChild(last_input)
+                line = 1
+                
+            }
+        }
+        
+       
+
+    </script>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+</html>
